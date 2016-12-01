@@ -7,7 +7,7 @@ def user_directory_path(instance, filename):
      return 'user_{0}/{1}'.format(instance.user.id, filename)
 
 class Image(models.Model):
-	user = models.ForeignKey(User, default=3)
+	user = models.ForeignKey(User)
    	description = models.CharField(max_length=255, blank=True)
 	image = models.ImageField(upload_to=user_directory_path)
 	uploaded_at = models.DateTimeField(auto_now_add=True)

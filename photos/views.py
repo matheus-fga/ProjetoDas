@@ -7,7 +7,9 @@ def image_upload(request):
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            image = form.save(commit=False)
+            image.user = request.user
+            image.save()
             return HttpResponseRedirect("/")
     else:
         form = ImageForm()

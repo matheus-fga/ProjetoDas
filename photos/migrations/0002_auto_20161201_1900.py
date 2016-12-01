@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import photos.models
+from django.conf import settings
 
 
 class Migration(migrations.Migration):
@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterField(
             model_name='image',
-            name='image',
-            field=models.ImageField(upload_to=photos.models.user_directory_path),
+            name='user',
+            field=models.ForeignKey(to=settings.AUTH_USER_MODEL),
         ),
     ]
