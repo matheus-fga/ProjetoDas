@@ -12,6 +12,7 @@ urlpatterns = patterns('',
                         url(r'^$', accounts.views.index, name='home'),
                         url(r'^signup/$', accounts.views.signup, name='signup'),
                         url(r'^signin/$', accounts.views.signin, name='signin'),
+                        url(r'^photos/$', photos.views.image_upload, name='photos'),
 			  )
 
 

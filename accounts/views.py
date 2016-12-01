@@ -28,7 +28,7 @@ def signin(request):
         
         if form.is_valid():
             login(request, form.get_user())
-            return HttpResponseRedirect("/")
+            return HttpResponseRedirect("/photos/")
         else:
             return render(request, "sign_in.html", {"form": form})
     

@@ -1,7 +1,7 @@
 from django import forms
-from uploads.core.models import Document
+from photos.models import Image
 
 class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
-        fields = ('description', 'image', )
+        fields = ('image', 'description' )
