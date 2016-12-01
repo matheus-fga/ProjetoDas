@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from photos.forms import *
+from photos.forms import ImageForm
+from photos.models import Image
 
 
 def image_upload(request):
@@ -13,4 +14,9 @@ def image_upload(request):
             return HttpResponseRedirect("/")
     else:
         form = ImageForm()
-    return render(request, 'image_upload.html', {'form': form })
+
+    images = Image.objects.filter(user=request.user)
+    return render(request, 'image_upload.html', {'form': form, 'images': images})
+
+
+    

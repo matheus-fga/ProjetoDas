@@ -2,12 +2,26 @@
 
 {% block content %}
 <center>
- <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Upload</button>
-  </form>
-
-  <p><a href="{% url 'home' %}">Return to home</a></p>	
+	<form method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+	    {{ form.as_p }}
+	    <button type="submit">Upload</button>
+	</form>
+	<br><br>
+	<div>
+		{% if images %}
+		    <ul>
+		    {% for img in images %}
+		        <li><a href="{{ img.image.url }}">{{ img.image.description }}
+		        <img src="{{ img.image.url }}" alt="{{ img.image.description }}">
+		        </a></li>
+		    {% endfor %}
+		    </ul>
+		{% else %}
+		    <p>No images.</p>
+		{% endif %}
+	</div>
+	<br><br>
+	<p><a href="{% url 'home' %}">Return to home</a></p>	
 </center>
 {% endblock %}
