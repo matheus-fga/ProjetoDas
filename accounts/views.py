@@ -3,11 +3,11 @@ from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login
+
  
 
 def index(request):
     return render_to_response("index.html")
- 
  
 def signup(request):
     if request.method == 'POST':

@@ -3,6 +3,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 
 import accounts.views
 import photos.views
@@ -13,6 +14,7 @@ urlpatterns = patterns('',
                         url(r'^signup/$', accounts.views.signup, name='signup'),
                         url(r'^signin/$', accounts.views.signin, name='signin'),
                         url(r'^photos/$', photos.views.image_upload, name='photos'),
+                        url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
 			  )
 
 
