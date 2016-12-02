@@ -2,6 +2,22 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from photos.forms import ImageForm
 from photos.models import Image
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+
+def index(request):
+    image_list = Image.objects.all()
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(image_list, 10)
+    try:
+        images = paginator.page(page)
+    except PageNotAnInteger:
+        images = paginator.page(1)
+    except EmptyPage:
+        images = paginator.page(paginator.num_pages)
+
+    return render(request, 'core/image_list.html', { 'images': images })
 
 
 def image_upload(request):

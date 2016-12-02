@@ -2,26 +2,56 @@
 
 {% block content %}
 <center>
-	<form method="post" enctype="multipart/form-data">
-		{% csrf_token %}
-	    {{ form.as_p }}
-	    <button type="submit">Upload</button>
-	</form>
-	<br><br>
-	<div>
-		{% if images %}
-		    <ul>
-		    {% for img in images %}
-		        <li><a href="{{ img.image.url }}">{{ img.image.description }}
-		        <img src="{{ img.image.url }}" alt="{{ img.image.description }}">
-		        </a></li>
-		    {% endfor %}
-		    </ul>
-		{% else %}
-		    <p>No images.</p>
-		{% endif %}
-	</div>
-	<br><br>
-	<p><a href="{% url 'home' %}">Return to home</a></p>	
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Upload</button>
+  </form>
+  <br><br>
+  <div class="container">
+    {% if images %}
+        <ul>
+          <table class="table table-bordered">
+            <tbody>
+              {% for img in images %}
+                <tr>
+                  <li><a href="{{ img.image.url }}">{{ img.image.description }}
+                  <img src="{{ img.image.url }}" alt="{{ img.image.description }}">
+                  </a></li>
+                </tr>
+
+                {% if images.has_other_pages %}
+                  <ul class="pagination">
+                    {% if images.has_previous %}
+                      <li><a href="?page={{ images.previous_page_number }}">&laquo;</a></li>
+                    {% else %}
+                      <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    {% for i in images.paginator.page_range %}
+                      {% if images.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                      {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                      {% endif %}
+                    {% endfor %}
+                    {% if images.has_next %}
+                      <li><a href="?page={{ images.next_page_number }}">&raquo;</a></li>
+                    {% else %}
+                      <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                  </ul>
+                {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+    {% else %}
+        <p>No images.</p>
+    {% endif %}
+    </div>
+  <br><br>
+  <p><a href="{% url 'home' %}">Return to home</a></p>  
 </center>
+
+
+
 {% endblock %}
