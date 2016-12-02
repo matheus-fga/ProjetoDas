@@ -731,6 +731,12 @@ pre code {
   max-height: 340px;
   overflow-y: scroll;
 }
+.container img {
+    max-width:500px;
+    max-height:500px;
+    width: auto;
+    height: auto;
+}
 .container {
   padding-right: 15px;
   padding-left: 15px;
